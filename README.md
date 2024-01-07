@@ -1,8 +1,11 @@
 # Icecast in Docker [![Build Status](https://travis-ci.org/moul/docker-icecast.svg?branch=master)](https://travis-ci.org/moul/docker-icecast)
 
-Icecast2 Dockerfile
 
-[![](http://dockeri.co/image/moul/icecast)](https://index.docker.io/u/moul/icecast/)
+Based on [moul/docker-icecast](https://github.com/moul/docker-icecast) with added ARM64 supported. 
+
+---
+
+Icecast2 Dockerfile
 
 ## Run
 
