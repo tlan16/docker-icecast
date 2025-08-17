@@ -25,11 +25,11 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/icecast:latest
-          cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/icecast:latest
-          cache-to: type=inline
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v4
         with:
