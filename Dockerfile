@@ -2,12 +2,14 @@ FROM debian:stable-slim
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get -qq -y update && \
+RUN \
+  --mount=type=cache,target=/var/cache/apt,sharing=locked \
+  --mount=type=cache,target=/var/lib/apt,sharing=locked \
+  rm -f /etc/apt/apt.conf.d/docker-clean && \
+  echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' >/etc/apt/apt.conf.d/keep-cache && \
+    apt-get -qq -y update && \
     apt-get -qq -y full-upgrade && \
-    apt-get -qq -y install icecast2 python3-pip sudo cron-apt && \
-    apt-get -y autoclean && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get -qq -y install icecast2 python3-pip sudo cron-apt
 
 RUN chown -R icecast2 /etc/icecast2 && \
     touch /var/log/icecast2/access.log && \
